@@ -1,16 +1,16 @@
-export default function ListTodos({ todos, setTodos }) {
+import { useContext } from 'react'
+import { AppContext } from '../context'
+
+export default function ListTodos() {
+	const { todos } = useContext(AppContext)
+	const { dispatchTodoEvent } = useContext(AppContext)
+
 	const handleDelete = (id) => {
-		const filtered = todos.filter((todo) => todo.id !== id)
-		setTodos(filtered)
+		dispatchTodoEvent('REMOVE_TODO', { id })
 	}
 
 	const handleCompleted = (id) => {
-		const status = todos.map((todo) => {
-			return todo.id === id
-				? { ...todo, completed: !todo.completed }
-				: { ...todo }
-		})
-		setTodos(status)
+		dispatchTodoEvent('TOGGLE_TODO', { id })
 	}
 
 	const listTodos = todos.map((item, id) => (

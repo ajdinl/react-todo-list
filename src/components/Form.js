@@ -1,11 +1,13 @@
-import { v4 as uuidv4 } from 'uuid'
+import { useState, useContext } from 'react'
+import { AppContext } from '../context'
 
-export default function Form({ todo, setTodo, setTodos }) {
+export default function Form() {
+	const [todo, setTodo] = useState('')
+	const { dispatchTodoEvent } = useContext(AppContext)
+
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		setTodos((prev) => {
-			return [...prev, { id: uuidv4(), todo }]
-		})
+		dispatchTodoEvent('ADD_TODO', todo)
 		setTodo('')
 	}
 
