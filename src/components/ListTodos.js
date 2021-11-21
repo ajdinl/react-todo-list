@@ -4,6 +4,7 @@ import { AppContext } from '../context'
 export default function ListTodos() {
 	const { todos } = useContext(AppContext)
 	const { dispatchTodoEvent } = useContext(AppContext)
+	console.log(todos)
 
 	const handleDelete = (id) => {
 		dispatchTodoEvent('REMOVE_TODO', { id })
@@ -34,8 +35,8 @@ export default function ListTodos() {
 	return (
 		<div>
 			<div className='mt-10 border-2 border-gray-400 rounded p-2'>
-				{!todos ? (
-					'Please enter your todo'
+				{todos.length === 0 ? (
+					'Your todo list is empty'
 				) : (
 					<div className='flex flex-col space-y-2'>{listTodos}</div>
 				)}

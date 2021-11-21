@@ -28,7 +28,6 @@ function App() {
 				return
 			case 'REMOVE_TODO':
 				setTodos(todos.filter((todo) => todo.id !== payload.id))
-				console.log(todos)
 				return
 			default:
 				return
