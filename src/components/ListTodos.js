@@ -4,7 +4,6 @@ import { AppContext } from '../context'
 export default function ListTodos() {
 	const { todos } = useContext(AppContext)
 	const { dispatchTodoEvent } = useContext(AppContext)
-	console.log(todos)
 
 	const handleDelete = (id) => {
 		dispatchTodoEvent('REMOVE_TODO', { id })
