@@ -1,18 +1,19 @@
 import { useState, useContext } from 'react'
 import { AppContext } from '../context'
+import { ACTIONS } from '../actions/actions'
 
 export default function Form() {
-	const [todo, setTodo] = useState('')
-	const { dispatchTodoEvent } = useContext(AppContext)
+	const [newTodo, setnewTodo] = useState('')
+	const { dispatch } = useContext(AppContext)
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		dispatchTodoEvent('ADD_TODO', todo)
-		setTodo('')
+		dispatch({ type: ACTIONS.ADD_TODO, payload: { newTodo } })
+		setnewTodo('')
 	}
 
 	const handleChange = (e) => {
-		setTodo(e.target.value)
+		setnewTodo(e.target.value)
 	}
 
 	return (
@@ -25,7 +26,7 @@ export default function Form() {
 				className='text-blue-600 w-48 sm:w-64 focus:outline-none rounded'
 				placeholder='Do some job'
 				type='text'
-				value={todo}
+				value={newTodo}
 				onChange={handleChange}
 			/>
 			<button className='w-20 rounded bg-blue-400' type='submit'>

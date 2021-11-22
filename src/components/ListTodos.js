@@ -1,22 +1,23 @@
 import { useContext } from 'react'
 import { AppContext } from '../context'
+import { ACTIONS } from '../actions/actions'
 
 export default function ListTodos() {
 	const { todos } = useContext(AppContext)
-	const { dispatchTodoEvent } = useContext(AppContext)
+	const { dispatch } = useContext(AppContext)
 
 	const handleDelete = (id) => {
-		dispatchTodoEvent('REMOVE_TODO', { id })
+		dispatch({ type: ACTIONS.REMOVE_TODO, payload: { id } })
 	}
 
 	const handleCompleted = (id) => {
-		dispatchTodoEvent('TOGGLE_TODO', { id })
+		dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id } })
 	}
 
-	const listTodos = todos.map((item, id) => (
+	const listTodos = todos.map((item) => (
 		<div
 			className='flex flex-row m-2 break-all border-gray-300 border-b-2'
-			key={id}
+			key={item.id}
 		>
 			<span type='checkbox' onClick={() => handleCompleted(item.id)}>
 				<div className={`${item.completed ? 'line-through' : ''}`}>
